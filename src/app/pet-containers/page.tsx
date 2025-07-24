@@ -33,7 +33,7 @@ function PetContainerItem({petContainer}: PetContainerItemProps) {
             </p>
 
             <Popover>
-                <PopoverTrigger>
+                <PopoverTrigger asChild>
                     <Button variant="secondary">Більше</Button>
                 </PopoverTrigger>
                 <PopoverContent>
