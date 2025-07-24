@@ -1,4 +1,5 @@
 import petContainers from '@/pet-containers.json';
+import {resolveColorName} from '@/utils/resolve-color-name';
 
 export interface PetContainer {
     vendorCode: string;
@@ -16,6 +17,9 @@ export interface PetContainer {
 
 export class PetContainersService {
     getAll(): PetContainer[] {
-        return petContainers;
+        return petContainers.map(petContainer => {
+            petContainer.color = resolveColorName(petContainer.color);
+            return petContainer;
+        });
     }
 }
