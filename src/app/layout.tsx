@@ -2,6 +2,13 @@ import type {Metadata} from 'next';
 import './globals.css';
 import {ThemeProvider} from '@/components/theme-provider';
 import {Suspense} from 'react';
+import Link from 'next/link';
+import {
+    NavigationMenu,
+    NavigationMenuItem,
+    NavigationMenuLink,
+    NavigationMenuList,
+} from '@/components/ui/navigation-menu';
 
 export const metadata: Metadata = {
     title: 'Create Next App',
@@ -23,6 +30,19 @@ export default function RootLayout({
                         enableSystem
                         disableTransitionOnChange
                     >
+                        <div className="p-2 border-b-2">
+                            <NavigationMenu>
+                                <NavigationMenuList>
+                                    <NavigationMenuItem>
+                                        <NavigationMenuLink asChild>
+                                            <Link href="/pet-containers">
+                                                ПЕТ пляшки 🍾
+                                            </Link>
+                                        </NavigationMenuLink>
+                                    </NavigationMenuItem>
+                                </NavigationMenuList>
+                            </NavigationMenu>
+                        </div>
                         {children}
                     </ThemeProvider>
                 </Suspense>

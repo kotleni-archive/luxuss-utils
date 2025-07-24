@@ -3,6 +3,7 @@
 import {Button} from '@/components/ui/button';
 import {Input} from '@/components/ui/input';
 import {Popover, PopoverContent, PopoverTrigger} from '@/components/ui/popover';
+import {Separator} from '@/components/ui/separator';
 import {
     PetContainer,
     PetContainersService,
@@ -20,7 +21,7 @@ function PetContainerItem({petContainer}: PetContainerItemProps) {
     'use client';
 
     return (
-        <div className="p-2 border-1 rounded-xs flex flex-col items-center gap-2">
+        <div className="p-2 border-1 rounded-xs flex flex-col items-center gap-0">
             <Image
                 width={120}
                 height={120}
@@ -34,20 +35,23 @@ function PetContainerItem({petContainer}: PetContainerItemProps) {
 
             <Popover>
                 <PopoverTrigger asChild>
-                    <Button variant="secondary">Більше</Button>
+                    <Button variant="secondary" className="mt-1">
+                        Більше
+                    </Button>
                 </PopoverTrigger>
                 <PopoverContent>
-                    <p hidden={petContainer.pcsInBox === undefined}>
-                        В коробці: {petContainer.pcsInBox}
-                    </p>
-                    <p>Мінімальний лот: {petContainer.minimalLot}</p>
                     <p>Висота: {petContainer.height}</p>
                     <p>Ширина: {petContainer.width}</p>
                     <p>Глубина: {petContainer.depth}</p>
                     <p>Стандарт горла: {petContainer.throatStandart}</p>
+                    <Separator className="my-1" />
+                    <p hidden={petContainer.pcsInBox === undefined}>
+                        В коробці: {petContainer.pcsInBox}
+                    </p>
                     <p hidden={petContainer.gofroBoxDimentions === undefined}>
                         Коробка: {petContainer.gofroBoxDimentions}
                     </p>
+                    <p>Мінімальний лот: {petContainer.minimalLot}</p>
                 </PopoverContent>
             </Popover>
         </div>
