@@ -7,6 +7,7 @@ import {
     PetContainer,
     PetContainersService,
 } from '@/services/petcontainers-service';
+import {resolveColorName} from '@/utils/resolve-color-name';
 import Image from 'next/image';
 import {useEffect, useState} from 'react';
 
@@ -29,7 +30,8 @@ function PetContainerItem({petContainer}: PetContainerItemProps) {
             />
             <p className="font-bold">{petContainer.vendorCode}</p>
             <p>
-                {petContainer.color} | {petContainer.volume} мл
+                {resolveColorName(petContainer.color)} | {petContainer.volume}{' '}
+                мл
             </p>
 
             <Popover>
