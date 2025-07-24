@@ -15,7 +15,7 @@ export interface PetContainer {
 }
 
 export class PetContainersService {
-    async fetchAll(): Promise<PetContainer[]> {
+    getAll(): PetContainer[] {
         return petContainers;
     }
 }

@@ -1,10 +1,14 @@
+'use client';
+
 import {Button} from '@/components/ui/button';
+import {Input} from '@/components/ui/input';
 import {Popover, PopoverContent, PopoverTrigger} from '@/components/ui/popover';
 import {
     PetContainer,
     PetContainersService,
 } from '@/services/petcontainers-service';
 import Image from 'next/image';
+import {useEffect, useState} from 'react';
 
 const petContainersService = new PetContainersService();
 
@@ -54,13 +58,39 @@ function PetContainerItem({key, petContainer}: PetContainerItemProps) {
     );
 }
 
-export default async function PetContainersPage() {
-    const petContainers = await petContainersService.fetchAll();
+const initialPetContainers = petContainersService.getAll();
+
+export default function PetContainersPage() {
+    const [searchTerm, setSearchTerm] = useState<string>('');
+    const [filteredContainers, setFilteredContainers] =
+        useState<PetContainer[]>(initialPetContainers);
+
+    useEffect(() => {
+        const lowerCaseSearchTerm = searchTerm.toLowerCase();
+        const newFilteredContainers = initialPetContainers.filter(
+            pet =>
+                pet.vendorCode.toLowerCase().includes(lowerCaseSearchTerm) ||
+                pet.color.toLowerCase().includes(lowerCaseSearchTerm) ||
+                String(pet.volume).includes(lowerCaseSearchTerm),
+        );
+        setFilteredContainers(newFilteredContainers);
+    }, [searchTerm]);
+
     return (
-        <div className="w-full p-4 grid justify-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5  auto-rows-fr gap-4">
-            {petContainers.map((pet, index) => {
-                return <PetContainerItem key={index} petContainer={pet} />;
-            })}
+        <div className="flex flex-col gap-4 p-4">
+            <div className="mb-2 flex justify-center">
+                <Input
+                    type="text"
+                    placeholder="Пошук за артикулом, кольором або об'ємом..."
+                    value={searchTerm}
+                    onChange={e => setSearchTerm(e.target.value)}
+                />
+            </div>
+            <div className="w-full grid justify-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5  auto-rows-fr gap-4">
+                {filteredContainers.map((pet, index) => {
+                    return <PetContainerItem key={index} petContainer={pet} />;
+                })}
+            </div>
         </div>
     );
 }
