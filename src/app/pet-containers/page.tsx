@@ -29,10 +29,10 @@ function PetContainerItem({petContainer}: PetContainerItemProps) {
                 alt={petContainer.vendorCode}
             />
             <p className="font-bold">{petContainer.vendorCode}</p>
-            <p className="flex flex-row gap-1">
+            <div className="flex flex-row gap-1">
                 {petContainer.color} <Separator orientation="vertical" />
                 {petContainer.volume} мл
-            </p>
+            </div>
 
             <Popover>
                 <PopoverTrigger asChild>
