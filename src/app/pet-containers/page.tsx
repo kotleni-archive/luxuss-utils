@@ -27,6 +27,7 @@ function PetContainerItem({petContainer}: PetContainerItemProps) {
                 height={120}
                 src={petContainer.imageUrl}
                 alt={petContainer.vendorCode}
+                className="rounded-sm"
             />
             <p className="font-bold">{petContainer.vendorCode}</p>
             <div className="flex flex-row gap-1">
