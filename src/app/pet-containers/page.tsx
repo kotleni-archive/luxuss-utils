@@ -13,18 +13,14 @@ import {useEffect, useState} from 'react';
 const petContainersService = new PetContainersService();
 
 interface PetContainerItemProps {
-    key: number;
     petContainer: PetContainer;
 }
 
-function PetContainerItem({key, petContainer}: PetContainerItemProps) {
+function PetContainerItem({petContainer}: PetContainerItemProps) {
     'use client';
 
     return (
-        <div
-            key={key}
-            className="p-2 border-1 rounded-xs flex flex-col items-center gap-2"
-        >
+        <div className="p-2 border-1 rounded-xs flex flex-col items-center gap-2">
             <Image
                 width={120}
                 height={120}
